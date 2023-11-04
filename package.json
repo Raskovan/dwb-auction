@@ -1,7 +1,10 @@
 {
   "name": "dwb-auction",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "license": "MIT",
+  "repository": "https://github.com/Raskovan/dwb-auction.git",
+  "author": "Alex Katalkin <alexey.katalkin@gmail.com>",
   "dependencies": {
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/client-preset": "^4.1.0",

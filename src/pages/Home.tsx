@@ -22,7 +22,7 @@ const Home = (props: Props) => {
               </Link>
 
               <p>About: {itemOnSale.description}</p>
-              <p>Price: ${itemOnSale.currentPrice}</p>
+              <p>Current bid: ${itemOnSale.currentPrice}</p>
             </div>
           ))
         )}

@@ -35,7 +35,7 @@ const ItemPage = () => {
             <p>{data?.itemById?.description}</p>
             <p>Submitted: {formatDate(data?.itemById?.startTime)}</p>
             <p>Ends: {data?.itemById?.endTime}</p>
-            <p>Current price: ${data?.itemById?.currentPrice}</p>
+            <p>Current bid: ${data?.itemById?.currentPrice}</p>
             <p>Seller: {data?.itemById?.seller?.name}</p>
             <button onClick={() => bidsRefetch()}>Show bid history</button>
             {bidsData
