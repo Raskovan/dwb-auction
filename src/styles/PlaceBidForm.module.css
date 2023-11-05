@@ -1,0 +1,65 @@
+.form_popup {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup_inner {
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  /* width: 40%; */
+}
+
+/* Add styles to the form container */
+.form_container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+.form_container input[type=text],
+.form_container input[type=password] {
+  width: 100%;
+  padding: 15px 0;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.form_container input[type=text]:focus,
+.form_container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.form_container .btn {
+  background-color: #d22238;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 1;
+}
+
+.form_container .cancel {
+  background-color: grey;
+}
+
+/* Add some hover effects to buttons */
+.form_container .btn:hover,
+.open_button:hover {
+  opacity: 0.8;
+}

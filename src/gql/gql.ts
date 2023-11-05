@@ -16,6 +16,7 @@ const documents = {
     "\n  query ItemsOnSale{\n    itemsOnSale {\n      nodes {\n        id\n        title\n        description\n        startTime\n        endTime\n        currentPrice\n        images {\n          id\n          url\n        }\n        seller {\n          id\n          name\n          email\n        }\n      }\n    }\n  }\n": types.ItemsOnSaleDocument,
     "\n  query ItemById($id: ID!) {\n    itemById(id: $id) {\n      id\n      title\n      description\n      startTime\n      endTime\n      currentPrice\n      images {\n        id\n        url\n      }\n      seller {\n        id\n        name\n        email\n      }\n    }\n  }\n": types.ItemByIdDocument,
     "\n  query BidsByItemId($itemId: ID!) {\n    bidsByItemId(itemId: $itemId) {\n      nodes {\n        id\n        message\n        bidTime\n        newPrice\n        bidder {\n          id\n          name\n          email\n        }\n      }\n    }\n  }\n": types.BidsByItemIdDocument,
+    "\n  mutation MakeBidByItemId($itemId: ID!, $bidderId: ID!, $newPrice: Int!, $message: String!) {\n    makeBidByItemId(itemId: $itemId, bidderId: $bidderId, newPrice: $newPrice, message: $message)\n  }\n": types.MakeBidByItemIdDocument,
 };
 
 /**
@@ -44,6 +45,10 @@ export function graphql(source: "\n  query ItemById($id: ID!) {\n    itemById(id
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query BidsByItemId($itemId: ID!) {\n    bidsByItemId(itemId: $itemId) {\n      nodes {\n        id\n        message\n        bidTime\n        newPrice\n        bidder {\n          id\n          name\n          email\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query BidsByItemId($itemId: ID!) {\n    bidsByItemId(itemId: $itemId) {\n      nodes {\n        id\n        message\n        bidTime\n        newPrice\n        bidder {\n          id\n          name\n          email\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation MakeBidByItemId($itemId: ID!, $bidderId: ID!, $newPrice: Int!, $message: String!) {\n    makeBidByItemId(itemId: $itemId, bidderId: $bidderId, newPrice: $newPrice, message: $message)\n  }\n"): (typeof documents)["\n  mutation MakeBidByItemId($itemId: ID!, $bidderId: ID!, $newPrice: Int!, $message: String!) {\n    makeBidByItemId(itemId: $itemId, bidderId: $bidderId, newPrice: $newPrice, message: $message)\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

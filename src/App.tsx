@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home />, errorElement: <NotFoundPage /> },
-  { path: "items/:itemId", element: <ItemPage /> }
+  { path: "items/:itemId", element: <ItemPage />, errorElement: <NotFoundPage /> }
 ]);
 
 const queryClient = new QueryClient();
@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 }

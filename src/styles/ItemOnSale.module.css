@@ -1,0 +1,61 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 500px));
+  grid-gap: 1rem;
+  grid-auto-flow: dense;
+  padding: 50px;
+  justify-content: center;
+}
+
+.image_container {
+  width: 500px;
+  height: 500px;
+}
+
+.image {
+  object-fit: contain;
+  border: 1px solid grey
+}
+
+.button_as_text {
+  text-decoration: none;
+  font-size: 0.8rem;
+  background-color: transparent;
+  padding: 0;
+  color: grey
+}
+
+.button_as_text:hover {
+  color: #d22238;
+  background-color: transparent;
+}
+
+button {
+  font-size: 1.125rem;
+  background-color: #d22238;
+  border: none;
+  color: white;
+  padding: 16px 20px;
+  /* font-weight: 500; */
+  text-decoration: none;
+  margin: 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.8
+}
+
+@media only screen and (max-width: 414px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+    padding: 0;
+  }
+
+  .image_container {
+    width: 300px;
+    height: 300px;
+  }
+}

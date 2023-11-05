@@ -63,3 +63,10 @@ export const bidsByItemIdDocument = graphql(/* GraphQL */ `
     }
   }
 `)
+
+
+export const makeBidByItemIdDocument = graphql(/* GraphQL */ `
+  mutation MakeBidByItemId($itemId: ID!, $bidderId: ID!, $newPrice: Int!, $message: String!) {
+    makeBidByItemId(itemId: $itemId, bidderId: $bidderId, newPrice: $newPrice, message: $message)
+  }
+`)
