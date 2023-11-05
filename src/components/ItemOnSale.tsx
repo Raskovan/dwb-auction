@@ -4,7 +4,6 @@ import { Item } from "../gql/graphql";
 import { formatDate } from "../helpers";
 import classes from "../styles/ItemOnSale.module.css";
 import PlaceBidForm from "./PlaceBidForm";
-import { Link } from "react-router-dom";
 
 type ItemOnSaleProps = {
   itemId: string | undefined;
@@ -47,12 +46,12 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
           <div>
             {showBidHistory && bidsData
               ? bidsData.bidsByItemId.nodes.map((bid, index) => (
-                  <div key={index}>
-                    <p style={{ fontSize: "0.8rem", lineHeight: "0.8" }}>
-                      <b>Bid ${bid.newPrice}</b> posted by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
-                      {bid.message ? `with message: ${bid.message}` : null}
-                    </p>
-                  </div>
+                  // <div key={index}>
+                  <p key={index} style={{ fontSize: "0.8rem", marginBottom: 0 }}>
+                    <b>Bid ${bid.newPrice}</b> posted by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
+                    {bid.message ? `with message: ${bid.message}` : null}
+                  </p>
+                  // </div>
                 ))
               : null}
           </div>

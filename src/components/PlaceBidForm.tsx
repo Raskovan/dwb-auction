@@ -14,7 +14,7 @@ const PlaceBidForm: React.FC<PlaceBidFormProps> = ({ handleShowPlaceBid, itemId,
     newPrice: (currentPrice + 1).toString(),
     message: "",
     itemId: itemId,
-    bidderId: "3"
+    bidderId: "17444285114799043248"
   });
 
   const ref = React.useRef(null);
@@ -65,6 +65,15 @@ const PlaceBidForm: React.FC<PlaceBidFormProps> = ({ handleShowPlaceBid, itemId,
             placeholder="Your bid"
             name="newPrice"
             required
+          />
+          <label htmlFor="bidw">User id (optional)</label>
+          <input
+            type="text"
+            min={currentPrice + 1}
+            value={bidFormData.bidderId}
+            onChange={e => onBidFormChange(e)}
+            placeholder="Your bid"
+            name="bidderId"
           />
           <label htmlFor="message">Message (optional)</label>
           <textarea onChange={e => onBidFormChange(e)} placeholder="Your message" name="message" cols={40} rows={3} />
