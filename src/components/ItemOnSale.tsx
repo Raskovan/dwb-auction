@@ -49,7 +49,8 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
               ? bidsData.bidsByItemId.nodes.map((bid, index) => (
                   <div key={index}>
                     <p style={{ fontSize: "0.8rem", lineHeight: "0.8" }}>
-                      ${bid.newPrice} by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}
+                      <b>Bid ${bid.newPrice}</b> posted by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
+                      {bid.message ? `with message: ${bid.message}` : null}
                     </p>
                   </div>
                 ))
