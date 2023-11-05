@@ -5,13 +5,13 @@ import Header from "../components/Header";
 import Intro from "../components/Intro";
 
 const Home = () => {
-  const { status, data } = useItemsOnSale();
+  const { data, isLoading } = useItemsOnSale();
 
   return (
     <div>
       <Header />
       <Intro />
-      {status === "loading" ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <div
@@ -25,9 +25,7 @@ const Home = () => {
           }}
         >
           {data?.itemsOnSale?.nodes.map((itemOnSale, index) => (
-            <>
-              <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
-            </>
+            <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
           ))}
         </div>
       )}

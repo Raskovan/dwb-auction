@@ -1,5 +1,5 @@
 import request from "graphql-request";
-import { useMutation, useQuery } from "react-query"
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query"
 import { BidsByItemIdQuery, ItemByIdQuery, ItemsOnSaleQuery, MakeBidByItemIdMutation } from "./gql/graphql";
 import { bidsByItemIdDocument, itemByIdDocument, itemsOnSaleDocument, makeBidByItemIdDocument } from "./queries";
 
@@ -25,24 +25,27 @@ export function useItemById(itemId: string | undefined) {
   })
 }
 
-export function useBidsByItemId(itemId: string | undefined) {
+export function useBidsByItemId(itemId: string | undefined, last: number = 10, showBidHistory: boolean) {
   if (!itemId) throw new Error("Not found")
   return useQuery<BidsByItemIdQuery>({
-    queryKey: ['bids', itemId], queryFn: async () => await request(
+    queryKey: ['auction-item', itemId, 'bids-history'], queryFn: async () => await request(
       endpoint,
       bidsByItemIdDocument,
-      { itemId: itemId }
-    ), enabled: false
+      { itemId: itemId, last: last }
+    ), enabled: showBidHistory
   })
 }
 
-export function useMakeBidByItemId(itemId: string, bidderId: string, newPrice: number, message: string) {
+export function useMakeBidByItemId(itemId: string, bidderId: string, newPrice: number, message: string, queryClient: QueryClient) {
   if (!itemId) throw new Error("Not found")
   return useMutation<MakeBidByItemIdMutation>({
     mutationFn: () => request(
       endpoint,
       makeBidByItemIdDocument,
       { itemId: itemId, bidderId: bidderId, newPrice: newPrice, message: message }
-    )
+    ),
+    onSuccess: () => {
+      return queryClient.invalidateQueries({ queryKey: ['auction-item', itemId] })
+    }
   })
 }

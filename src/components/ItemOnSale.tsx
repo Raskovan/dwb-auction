@@ -4,6 +4,7 @@ import { Item } from "../gql/graphql";
 import { formatDate } from "../helpers";
 import classes from "../styles/ItemOnSale.module.css";
 import PlaceBidForm from "./PlaceBidForm";
+import { Link } from "react-router-dom";
 
 type ItemOnSaleProps = {
   itemId: string | undefined;
@@ -11,10 +12,10 @@ type ItemOnSaleProps = {
 };
 
 const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
-  const { data: bidsData, refetch: bidsRefetch } = useBidsByItemId(itemId);
-
   const [showBidHistory, setShowBidHistory] = React.useState(false);
   const [showPlaceBid, setShowPlaceBid] = React.useState(false);
+
+  const { data: bidsData, refetch: bidsRefetch } = useBidsByItemId(itemId, 10, showBidHistory);
 
   const handleShowBidHistory = () => {
     setShowBidHistory(!showBidHistory);
@@ -59,7 +60,7 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
           </div>
         </div>
       </div>
-      {showPlaceBid && <PlaceBidForm handleShowPlaceBid={setShowPlaceBid} />}
+      {showPlaceBid && <PlaceBidForm handleShowPlaceBid={setShowPlaceBid} itemId={itemId} currentPrice={itemById?.currentPrice} />}
     </>
   );
 };

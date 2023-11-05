@@ -67,8 +67,36 @@ strong {
   --main-color-off-white: rgb(205, 205, 205);
 }
 
+button {
+  font-size: 1.125rem;
+  background-color: #d22238;
+  border: none;
+  color: white;
+  padding: 16px 20px;
+  /* font-weight: 500; */
+  text-decoration: none;
+  margin: 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.8
+}
+
+button:disabled,
+button[disabled] {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: no-drop;
+}
+
+textarea {
+  font-family: inherit;
+}
+
 @media only screen and (max-width: 414px) {
   html {
-    font-size: 14px;
+    font-size: 16px;
   }
 }

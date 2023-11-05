@@ -1,25 +1,26 @@
 import React from "react";
 import { useItemById } from "../data-loaders";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import ItemOnSale from "../components/ItemOnSale";
-import PlaceBidForm from "../components/PlaceBidForm";
 
 const ItemPage = () => {
   const { itemId } = useParams();
-  const { status, data } = useItemById(itemId);
+  const { data, isLoading } = useItemById(itemId);
 
   return (
     <div>
       <Header />
-      {status === "loading" || !data || !itemId ? (
+      {isLoading || !data || !itemId ? (
         <p>Loading...</p>
       ) : (
         <div style={{ padding: "50px 30px" }}>
+          <Link to="/">
+            <p>{"< Go back to the list"}</p>
+          </Link>
           <ItemOnSale itemId={itemId} itemById={data?.itemById} />
         </div>
       )}
-      {/* <PlaceBidForm /> */}
     </div>
   );
 };

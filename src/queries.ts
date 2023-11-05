@@ -47,8 +47,8 @@ export const itemByIdDocument = graphql(/* GraphQL */ `
 `)
 
 export const bidsByItemIdDocument = graphql(/* GraphQL */ `
-  query BidsByItemId($itemId: ID!) {
-    bidsByItemId(itemId: $itemId) {
+  query BidsByItemId($itemId: ID!, $last: Int, $before: String) {
+    bidsByItemId(itemId: $itemId, last: $last, before: $before) {
       nodes {
         id
         message
@@ -59,6 +59,12 @@ export const bidsByItemIdDocument = graphql(/* GraphQL */ `
           name
           email
         }
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
       }
     }
   }
