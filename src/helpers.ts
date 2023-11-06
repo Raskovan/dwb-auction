@@ -9,7 +9,7 @@ export const formatDate = (inputDate: string) => {
   // const seconds = String(date.getSeconds()).padStart(2, "0");
 
   // Format the date string
-  const formattedDate = `${day}.${month}.${year} at ${hours}:${minutes}`;
+  const formattedDate = `${month}.${day}.${year} at ${hours}:${minutes}`;
 
   return formattedDate;
 };

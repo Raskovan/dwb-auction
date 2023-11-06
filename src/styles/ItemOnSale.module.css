@@ -1,15 +1,20 @@
 .container {
   display: grid;
+  /* grid-template-columns: 500px 500px; */
+  grid-template-rows: 2fr;
   grid-template-columns: repeat(auto-fit, minmax(500px, 500px));
   grid-gap: 1rem;
   grid-auto-flow: dense;
-  padding: 50px;
   justify-content: center;
 }
 
 .image_container {
   width: 500px;
   height: 500px;
+}
+
+.text_span {
+  grid-column: span 2
 }
 
 .image {
@@ -32,15 +37,19 @@
 
 
 
-@media only screen and (max-width: 414px) {
+@media only screen and (max-width: 600px) {
   .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+    grid-template-columns: repeat(1, minmax(378px, 378px));
     padding: 0;
   }
 
   .image_container {
-    width: 300px;
-    height: 300px;
+    width: 378px;
+    height: 378px;
+  }
+
+  .text_span {
+    grid-column: 1
   }
 }

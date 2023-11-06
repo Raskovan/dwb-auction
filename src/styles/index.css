@@ -94,9 +94,3 @@ button[disabled] {
 textarea {
   font-family: inherit;
 }
-
-@media only screen and (max-width: 414px) {
-  html {
-    font-size: 16px;
-  }
-}

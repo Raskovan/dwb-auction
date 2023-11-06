@@ -4,6 +4,7 @@ import { Item } from "../gql/graphql";
 import { formatDate } from "../helpers";
 import classes from "../styles/ItemOnSale.module.css";
 import PlaceBidForm from "./PlaceBidForm";
+// import { Link } from "react-router-dom";
 
 type ItemOnSaleProps = {
   itemId: string | undefined;
@@ -28,6 +29,11 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
   return (
     <>
       <div className={classes.container}>
+        {/* <div className={classes.text_span}>
+          <Link to="/">
+            <p>{"< Go back to the list"}</p>
+          </Link>
+        </div> */}
         <div className={classes.image_container}>
           <img src={itemById?.images[0].url} alt={itemById?.images[0].id} width="100%" height="100%" className={classes.image} />
         </div>
