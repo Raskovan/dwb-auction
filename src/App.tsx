@@ -6,10 +6,13 @@ import ItemPage from "./pages/ItemPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-const router = createBrowserRouter([
-  { path: "/", element: <Home />, errorElement: <NotFoundPage /> },
-  { path: "items/:itemId", element: <ItemPage />, errorElement: <NotFoundPage /> }
-]);
+const router = createBrowserRouter(
+  [
+    { path: "/", element: <Home />, errorElement: <NotFoundPage /> },
+    { path: "items/:itemId", element: <ItemPage />, errorElement: <NotFoundPage /> }
+  ]
+  // { basename: "/nrc-stupa-auction" }
+);
 
 const queryClient = new QueryClient();
 

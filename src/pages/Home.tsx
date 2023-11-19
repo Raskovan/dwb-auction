@@ -1,7 +1,7 @@
 import React from "react";
 import { useItemsOnSale } from "../data-loaders";
 import ItemOnSaleCard from "../components/ItemOnSaleCard";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import Intro from "../components/Intro";
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <div style={{ padding: "50px 8vmin" }}>
         <Intro />
         {isLoading ? (
