@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Item } from "../gql/graphql";
+import classes from "../styles/ItemOnSaleCard.module.css";
 
 type ItemOnSaleCardProps = {
   itemOnSale: Item;
@@ -8,9 +9,10 @@ type ItemOnSaleCardProps = {
 
 const ItemOnSaleCard: React.FC<ItemOnSaleCardProps> = ({ itemOnSale }) => {
   const navigate = useNavigate();
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", cursor: "pointer" }} onClick={() => navigate(`items/${itemOnSale.id}`)}>
-      <div style={{ width: "300px", height: "300px" }}>
+    <div className={classes.card_container} onClick={() => navigate(`items/${itemOnSale.id}`)}>
+      <div className={classes.image_container}>
         <img
           src={itemOnSale.images[0].url}
           alt={itemOnSale.images[0].id}
@@ -19,7 +21,7 @@ const ItemOnSaleCard: React.FC<ItemOnSaleCardProps> = ({ itemOnSale }) => {
           style={{ objectFit: "contain", border: "1px solid grey" }}
         />
       </div>
-      <div style={{ marginTop: "20px" }}>
+      <div className={classes.card_text_container}>
         <h1>{itemOnSale.title}</h1>
         <h3>Current bid: ${itemOnSale.currentPrice}</h3>
       </div>

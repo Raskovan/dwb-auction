@@ -1,16 +1,11 @@
 .container {
-  display: grid;
-  /* grid-template-columns: 500px 500px; */
-  grid-template-rows: 2fr;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 500px));
-  grid-gap: 1rem;
-  grid-auto-flow: dense;
-  justify-content: center;
+  display: flex;
+
 }
 
 .image_container {
-  width: 500px;
-  height: 500px;
+  width: 50vw;
+  height: 50vw;
 }
 
 .text_span {
@@ -20,6 +15,15 @@
 .image {
   object-fit: contain;
   border: 1px solid grey
+}
+
+.preview_image {
+  object-fit: contain;
+  border: 1px solid grey;
+  width: 90px;
+  height: 90px;
+  margin-right: 20px;
+  cursor: pointer;
 }
 
 .button_as_text {
@@ -39,17 +43,12 @@
 
 @media only screen and (max-width: 600px) {
   .container {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(378px, 378px));
-    padding: 0;
+    flex-direction: column-reverse;
+    gap: 20px
   }
 
   .image_container {
-    width: 378px;
-    height: 378px;
-  }
-
-  .text_span {
-    grid-column: 1
+    width: 95vw;
+    height: 95vw;
   }
 }

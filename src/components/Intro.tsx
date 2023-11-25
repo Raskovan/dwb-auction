@@ -5,7 +5,7 @@ type Props = {};
 const Intro = (props: Props) => {
   return (
     <div>
-      <p style={{ fontSize: "3rem", textAlign: "center" }}>NRC Stupa auction</p>
+      <p style={{ fontSize: "3rem" }}>NRC Stupa auction</p>
     </div>
   );
 };

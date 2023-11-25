@@ -1,14 +1,14 @@
 import { GraphQLClient } from "graphql-request";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query"
-import { BidsByItemIdQuery, ItemByIdQuery, ItemsOnSaleQuery, MakeBidByItemIdMutation } from "./gql/graphql";
-import { bidsByItemIdDocument, itemByIdDocument, itemsOnSaleDocument, makeBidByItemIdDocument } from "./queries";
+import { BidsByItemIdQuery, CreateOrUpdateUserMutation, ItemByIdQuery, ItemsOnSaleQuery, MakeBidByItemIdMutation } from "./gql/graphql";
+import { bidsByItemIdDocument, createOrUpdateUserDocument, itemByIdDocument, itemsOnSaleDocument, makeBidByItemIdDocument } from "./queries";
 
 const API_URL = "https://secure-bayou-87301-79d4527ad2ec.herokuapp.com"
-const API_KEY = "zrcbpAcaRvB3.deW6dXP"
+export const API_KEY = "zrcbpAcaRvB3.deW6dXP"
 
 const graphQLClient = new GraphQLClient(API_URL, {
   headers: {
-    "X-API-key": API_KEY
+    "X-API-KEY": API_KEY
   }
 });
 
@@ -49,5 +49,17 @@ export function useMakeBidByItemId(itemId: string, bidderId: string, newPrice: n
     onSuccess: () => {
       return queryClient.invalidateQueries({ queryKey: ['item-by-id', itemId] })
     }
+  })
+}
+
+export function useCreateOrUpdateUser(userId: string, username: string, email: string) {
+  if (!userId && !username && !email) window.open("https://app-dev.dw-connect.org/projects/test-in", '_self')
+  return useMutation<CreateOrUpdateUserMutation>({
+    mutationFn: () => graphQLClient.request(createOrUpdateUserDocument,
+      { userId: userId, username: username, email: email }
+    ),
+    // onSuccess: () => {
+    //   return queryClient.invalidateQueries({ queryKey: ['item-by-id', itemId] })
+    // }
   })
 }

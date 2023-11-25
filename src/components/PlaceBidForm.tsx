@@ -14,7 +14,7 @@ const PlaceBidForm: React.FC<PlaceBidFormProps> = ({ handleShowPlaceBid, itemId,
     newPrice: (currentPrice + 1).toString(),
     message: "",
     itemId: itemId,
-    bidderId: "17444285114799043248"
+    bidderId: localStorage.getItem("userId")
   });
 
   const ref = React.useRef(null);
@@ -33,7 +33,7 @@ const PlaceBidForm: React.FC<PlaceBidFormProps> = ({ handleShowPlaceBid, itemId,
 
   const mutation = useMakeBidByItemId(
     bidFormData.itemId!,
-    bidFormData.bidderId,
+    bidFormData.bidderId!,
     parseInt(bidFormData.newPrice),
     bidFormData.message,
     queryClient
@@ -54,7 +54,7 @@ const PlaceBidForm: React.FC<PlaceBidFormProps> = ({ handleShowPlaceBid, itemId,
     <div className={classes.form_popup} id="bidForm" ref={ref}>
       <div className={classes.popup_inner}>
         <form onSubmit={onSubmitBid} className={classes.form_container}>
-          <label htmlFor="bidw">
+          <label htmlFor="bid">
             <b>Bid</b>
           </label>
           <input
@@ -66,15 +66,15 @@ const PlaceBidForm: React.FC<PlaceBidFormProps> = ({ handleShowPlaceBid, itemId,
             name="newPrice"
             required
           />
-          <label htmlFor="bidw">User id (optional)</label>
+          {/* <label htmlFor="bidw">User id (optional)</label>
           <input
             type="text"
             min={currentPrice + 1}
-            value={bidFormData.bidderId}
+            value={bidFormData.bidderId!}
             onChange={e => onBidFormChange(e)}
             placeholder="Your bid"
             name="bidderId"
-          />
+          /> */}
           <label htmlFor="message">Message (optional)</label>
           <textarea onChange={e => onBidFormChange(e)} placeholder="Your message" name="message" cols={40} rows={3} />
           <button

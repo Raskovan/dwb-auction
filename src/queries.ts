@@ -76,3 +76,25 @@ export const makeBidByItemIdDocument = graphql(/* GraphQL */ `
     makeBidByItemId(itemId: $itemId, bidderId: $bidderId, newPrice: $newPrice, message: $message)
   }
 `)
+
+export const createOrUpdateUserDocument = graphql(/* GraphQL */ `
+  mutation CreateOrUpdateUser($userId: String!, $username: String!, $email: String!) {
+    createOrUpdateUser(userId: $userId, username: $username, email: $email)
+  }
+`)
+
+export const itemUpdatesDocument = `
+  subscription ItemUpdates($id: String!) {
+    itemUpdates(id: $id){
+     id
+     title
+     description
+     startTime
+     endTime
+     currentPrice
+     imagesAdded
+     imagesRemoved
+     bidMessage
+    }
+  }
+`

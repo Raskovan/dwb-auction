@@ -1,0 +1,33 @@
+.image_container {
+  width: 300px;
+  height: 300px
+}
+
+.card_container {
+  flex: 0 0 300px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.card_text_container {
+  margin-top: 20px
+}
+
+
+@media only screen and (max-width: 600px) {
+  .image_container {
+    width: 150px;
+    height: 150px
+  }
+
+  .card_container {
+    flex: 0 0 150px;
+    margin-right: 20px;
+    margin-bottom: 40px
+  }
+
+  .card_text_container {
+    margin-top: 12px
+  }
+}

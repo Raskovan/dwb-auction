@@ -4,7 +4,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
@@ -68,12 +68,14 @@ strong {
 }
 
 button {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
   font-size: 1.125rem;
   background-color: #d22238;
   border: none;
   color: white;
   padding: 16px 20px;
-  /* font-weight: 500; */
+  border-radius: 8px;
   text-decoration: none;
   margin: 0;
   cursor: pointer;
@@ -93,4 +95,16 @@ button[disabled] {
 
 textarea {
   font-family: inherit;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+
+    font-size: 1em;
+
+  }
+
+  h3 {
+    font-size: 0.8em;
+  }
 }
