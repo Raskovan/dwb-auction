@@ -44,15 +44,6 @@ const Home = () => {
           {data?.itemsOnSale?.nodes.map((itemOnSale, index) => (
             <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
           ))}
-          {data?.itemsOnSale?.nodes.map((itemOnSale, index) => (
-            <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
-          ))}
-          {data?.itemsOnSale?.nodes.map((itemOnSale, index) => (
-            <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
-          ))}
-          {data?.itemsOnSale?.nodes.map((itemOnSale, index) => (
-            <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
-          ))}
         </div>
       )}
     </div>
