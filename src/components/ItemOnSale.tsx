@@ -6,7 +6,7 @@ import classes from "../styles/ItemOnSale.module.css";
 import PlaceBidForm from "./PlaceBidForm";
 import { useNavigate } from "react-router-dom";
 import debounce from "lodash.debounce";
-import { useItemUpdateSubscription } from "../hooks/useReactQuerySubscription";
+import { useItemUpdateSubscription } from "../hooks/useItemUpdateSubscription";
 
 type ItemOnSaleProps = {
   itemId: string;

@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { itemUpdatesDocument } from "../queries";
 
-const url = 'wss://secure-bayou-87301-79d4527ad2ec.herokuapp.com/ws';
-const API_KEY = "zrcbpAcaRvB3.deW6dXP"
+const SUB_URL: string = (process.env.REACT_APP_API_SUBSCRIPTION_URL as string)
+const API_KEY: string = (process.env.REACT_APP_API_KEY as string)
 
 export const useItemUpdateSubscription = (itemId: string) => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    const ws = new WebSocket(url, 'graphql-ws');
+    const ws = new WebSocket(SUB_URL, 'graphql-ws');
 
     ws.onopen = () => {
       ws.send(JSON.stringify({

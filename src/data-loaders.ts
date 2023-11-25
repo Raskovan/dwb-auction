@@ -3,8 +3,8 @@ import { QueryClient, useMutation, useQuery } from "@tanstack/react-query"
 import { BidsByItemIdQuery, CreateOrUpdateUserMutation, ItemByIdQuery, ItemsOnSaleQuery, MakeBidByItemIdMutation } from "./gql/graphql";
 import { bidsByItemIdDocument, createOrUpdateUserDocument, itemByIdDocument, itemsOnSaleDocument, makeBidByItemIdDocument } from "./queries";
 
-const API_URL = "https://secure-bayou-87301-79d4527ad2ec.herokuapp.com"
-export const API_KEY = "zrcbpAcaRvB3.deW6dXP"
+const API_URL: string = (process.env.REACT_APP_API_URL as string)
+const API_KEY: string = (process.env.REACT_APP_API_KEY as string)
 
 const graphQLClient = new GraphQLClient(API_URL, {
   headers: {
