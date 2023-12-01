@@ -1,30 +1,25 @@
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { itemUpdatesDocument } from "../queries";
+import { catalogUpdatesDocument } from "../queries";
 
 const SUB_URL: string = (process.env.REACT_APP_API_SUBSCRIPTION_URL as string)
-const API_KEY: string = (process.env.REACT_APP_API_KEY as string)
 
-export const useItemUpdateSubscription = (itemId: string) => {
+export const useCatalogUpdatesSubscription = () => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
     const ws = new WebSocket(SUB_URL, 'graphql-ws');
     ws.onopen = () => {
       ws.send(JSON.stringify({
-        "type": "connection_init", "payload": {
-          headers: {
-            "X-API-KEY": API_KEY,
-          },
-        }
+        "type": "connection_init", "payload": {}
       }));
       ws.send(JSON.stringify({
-        "id": "1",
+        "id": "2",
         "type": "start",
         "payload": {
-          "variables": { "id": itemId },
+          "variables": {},
           "extensions": {},
-          "query": itemUpdatesDocument
+          "query": catalogUpdatesDocument
         }
       }))
     }
@@ -33,14 +28,12 @@ export const useItemUpdateSubscription = (itemId: string) => {
       const msg = JSON.parse(event.data)
 
       if (msg.type === 'data') {
-        const data = msg.payload.data.itemUpdates
-        queryClient.invalidateQueries({ queryKey: ['item-by-id', data.id] })
+        queryClient.invalidateQueries({ queryKey: ['items-on-sale'] })
       }
     }
 
     return () => {
       // Unsubscribe before exit
-      // ws.send(JSON.stringify({ "id": "1", "type": "stop" }))
       ws.close()
     }
   }, [])

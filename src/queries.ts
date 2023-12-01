@@ -86,15 +86,24 @@ export const createOrUpdateUserDocument = graphql(/* GraphQL */ `
 export const itemUpdatesDocument = `
   subscription ItemUpdates($id: String!) {
     itemUpdates(id: $id){
-     id
-     title
-     description
-     startTime
-     endTime
-     currentPrice
-     imagesAdded
-     imagesRemoved
-     bidMessage
+      id
+      title
+      description
+      startTime
+      endTime
+      currentPrice
+      imagesAdded
+      imagesRemoved
+      bidMessage
+    }
+  }
+`
+
+export const catalogUpdatesDocument = `
+  subscription CatalogUpdates {
+    catalogUpdates {
+      itemId
+      event
     }
   }
 `

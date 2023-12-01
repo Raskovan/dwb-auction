@@ -57,7 +57,7 @@ export function useCreateOrUpdateUser(userId: string, username: string, email: s
   return useMutation<CreateOrUpdateUserMutation>({
     mutationFn: () => graphQLClient.request(createOrUpdateUserDocument,
       { userId: userId, username: username, email: email }
-    ),
+    )
     // onSuccess: () => {
     //   return queryClient.invalidateQueries({ queryKey: ['item-by-id', itemId] })
     // }

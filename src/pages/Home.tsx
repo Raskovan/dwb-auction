@@ -4,13 +4,17 @@ import ItemOnSaleCard from "../components/ItemOnSaleCard";
 import { useSearchParams } from "react-router-dom";
 import debounce from "lodash.debounce";
 import classes from "../styles/Home.module.css";
+import { useCatalogUpdatesSubscription } from "../hooks/useCatalogUpdatesSubscription";
 
 const Home = () => {
   const { data, isLoading } = useItemsOnSale();
   const [searchParams] = useSearchParams();
+  const userId = searchParams.get("userId");
+  const userName = searchParams.get("userName");
+  const userEmail = searchParams.get("email");
 
   const ref = React.useRef<HTMLDivElement>(null);
-  const mutation = useCreateOrUpdateUser(searchParams.get("userId")!, searchParams.get("userName")!, searchParams.get("email")!);
+  const mutation = useCreateOrUpdateUser(userId!, userName!, userEmail!);
   const updateDimension = () => {
     window?.top?.postMessage({ actions: [{ action: "setHeight", valuePx: ref?.current?.clientHeight }] }, "*");
   };
@@ -28,12 +32,18 @@ const Home = () => {
 
   React.useEffect(() => {
     const getUserId = async () => {
-      const res = await mutation.mutateAsync();
-      localStorage.setItem("userId", res.createOrUpdateUser);
+      try {
+        const res = await mutation.mutateAsync();
+        localStorage.setItem("userId", res.createOrUpdateUser);
+      } catch (err) {
+        console.error(`Couldn't set a user for userId: ${userId} with error: ${err}`);
+      }
     };
-    if (searchParams.get("userId") && searchParams.get("userName") && searchParams.get("email") && !localStorage.getItem("userId"))
-      getUserId();
+
+    if (userId && userName && userEmail) getUserId();
   }, [searchParams]);
+
+  useCatalogUpdatesSubscription();
 
   return (
     <div>
