@@ -50,6 +50,18 @@ export type BidEdge = {
   node: Bid;
 };
 
+export enum CatalogEvent {
+  ItemAdded = 'ITEM_ADDED',
+  ItemChanged = 'ITEM_CHANGED',
+  ItemDeleted = 'ITEM_DELETED'
+}
+
+export type CatalogUpdate = {
+  __typename?: 'CatalogUpdate';
+  event: CatalogEvent;
+  itemId: Scalars['ID']['output'];
+};
+
 export type Item = {
   __typename?: 'Item';
   currentPrice: Scalars['Int']['output'];
@@ -59,6 +71,7 @@ export type Item = {
   images: Array<ItemImage>;
   seller?: Maybe<User>;
   startTime?: Maybe<Scalars['DateTime']['output']>;
+  state: ItemState;
   title: Scalars['String']['output'];
 };
 
@@ -84,7 +97,29 @@ export type ItemEdge = {
 export type ItemImage = {
   __typename?: 'ItemImage';
   id: Scalars['ID']['output'];
+  itemId: Scalars['ID']['output'];
   url: Scalars['String']['output'];
+};
+
+export enum ItemState {
+  Announced = 'ANNOUNCED',
+  Inactive = 'INACTIVE',
+  OnSale = 'ON_SALE',
+  Sold = 'SOLD'
+}
+
+export type ItemUpdate = {
+  __typename?: 'ItemUpdate';
+  bidMessage?: Maybe<Scalars['String']['output']>;
+  currentPrice?: Maybe<Scalars['Int']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  endTime?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  imagesAdded?: Maybe<Array<Scalars['ID']['output']>>;
+  imagesRemoved?: Maybe<Array<Scalars['ID']['output']>>;
+  startTime?: Maybe<Scalars['DateTime']['output']>;
+  state?: Maybe<ItemState>;
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 export type MutationRoot = {
@@ -165,7 +200,10 @@ export type MutationRootStartSellingItemByIdArgs = {
 export type MutationRootUpdateItemByIdArgs = {
   currentPrice?: InputMaybe<Scalars['Int']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  endTime?: InputMaybe<Scalars['DateTime']['input']>;
   id: Scalars['ID']['input'];
+  startTime?: InputMaybe<Scalars['DateTime']['input']>;
+  state?: InputMaybe<ItemState>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -186,6 +224,7 @@ export type QueryRoot = {
   __typename?: 'QueryRoot';
   bidById?: Maybe<Bid>;
   bidsByItemId: BidConnection;
+  imagesByIds: Array<ItemImage>;
   itemById?: Maybe<Item>;
   itemsOnSale: ItemConnection;
   userById?: Maybe<User>;
@@ -204,6 +243,11 @@ export type QueryRootBidsByItemIdArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   itemId: Scalars['ID']['input'];
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryRootImagesByIdsArgs = {
+  ids: Array<Scalars['ID']['input']>;
 };
 
 
@@ -226,7 +270,14 @@ export type QueryRootUserByIdArgs = {
 
 export type SubscriptionRoot = {
   __typename?: 'SubscriptionRoot';
+  catalogUpdates: CatalogUpdate;
+  itemUpdates: ItemUpdate;
   values: Scalars['String']['output'];
+};
+
+
+export type SubscriptionRootItemUpdatesArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type User = {
