@@ -44,16 +44,18 @@ const Home = () => {
   }, [searchParams]);
 
   useCatalogUpdatesSubscription();
-
+  console.log(data?.itemsOnSale?.nodes);
   return (
     <div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <div ref={ref} className={classes.items_grid}>
-          {data?.itemsOnSale?.nodes.map((itemOnSale, index) => (
-            <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
-          ))}
+          {data?.itemsOnSale?.nodes
+            .filter(item => item.state === "ON_SALE")
+            .map((itemOnSale, index) => (
+              <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
+            ))}
         </div>
       )}
     </div>

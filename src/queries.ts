@@ -13,12 +13,14 @@ export const itemsOnSaleDocument = graphql(/* GraphQL */ `
         images {
           id
           url
+          itemId
         }
         seller {
           id
           name
           email
         }
+        state
       }
     }
   }
@@ -36,12 +38,14 @@ export const itemByIdDocument = graphql(/* GraphQL */ `
       images {
         id
         url
+        itemId
       }
       seller {
         id
         name
         email
       }
+      state
     }
   }
 `)

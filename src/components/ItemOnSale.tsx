@@ -79,12 +79,13 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
           ) : null} */}
         </div>
         <div>
-          <h1 style={{ fontSize: "2rem", fontWeight: "700", marginBottom: "10px" }}>{itemById?.title}</h1>
+          <h1 style={{ fontSize: "2rem", fontWeight: "700" }}>{itemById?.title}</h1>
           <p>{itemById?.description}</p>
-          <p>Provided by {itemById?.seller?.name}</p>
+          <p className={classes.caption}>Provided by {itemById?.seller?.name}</p>
           {/* <p>Submitted: {formatDate(itemById?.startTime)}</p> */}
           {/* <p>Ends: {itemById?.endTime}</p> */}
-          <div style={{ marginBottom: "20px" }}>
+          <p className={classes.caption}>Started on {formatDate(itemById?.startTime)}</p>
+          <div style={{ marginBottom: "20px", marginTop: "20px" }}>
             <h3 style={{ fontSize: "1.3rem", marginRight: "10px" }}>Current bid: ${itemById?.currentPrice}</h3>
             <button className={classes.button_as_text} onClick={() => handleShowBidHistory()}>
               {showBidHistory ? "Hide bid history" : "Show bid history"}
@@ -94,7 +95,7 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
             {showBidHistory && bidsData
               ? bidsData.bidsByItemId.nodes.map((bid, index) => (
                   <p key={index} style={{ fontSize: "0.8rem", marginBottom: 0 }}>
-                    <b>Bid ${bid.newPrice}</b> posted by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
+                    <b>${bid.newPrice}</b> by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
                     {bid.message ? `with message: ${bid.message}` : null}
                   </p>
                 ))
