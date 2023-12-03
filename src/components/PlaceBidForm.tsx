@@ -11,7 +11,7 @@ type PlaceBidFormProps = {
 
 const PlaceBidForm: React.FC<PlaceBidFormProps> = ({ handleShowPlaceBid, itemId, currentPrice = 0 }) => {
   const [bidFormData, setBidFormData] = React.useState({
-    newPrice: (currentPrice + 1).toString(),
+    newPrice: Math.round(currentPrice + (currentPrice / 100) * 10).toString(),
     message: "",
     itemId: itemId,
     bidderId: localStorage.getItem("userId")

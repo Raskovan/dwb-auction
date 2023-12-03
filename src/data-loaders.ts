@@ -1,5 +1,5 @@
 import { GraphQLClient } from "graphql-request";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query"
+import { QueryClient, useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
 import { BidsByItemIdQuery, CreateOrUpdateUserMutation, ItemByIdQuery, ItemsOnSaleQuery, MakeBidByItemIdMutation } from "./gql/graphql";
 import { bidsByItemIdDocument, createOrUpdateUserDocument, itemByIdDocument, itemsOnSaleDocument, makeBidByItemIdDocument } from "./queries";
 
@@ -31,12 +31,19 @@ export function useItemById(itemId: string | undefined) {
 
 export function useBidsByItemId(itemId: string | undefined, last: number = 10, showBidHistory: boolean) {
   if (!itemId) throw new Error("Not found")
-  return useQuery<BidsByItemIdQuery>({
+  return useInfiniteQuery<BidsByItemIdQuery>({
     // to invalidate both queries - 'item-by-id' and 'bid-by-item-id' - structure key similar
     // https://stackoverflow.com/questions/74370694/react-query-invalidate-multiple-queries-but-wait-until-they-all-finished-on-mut
-    queryKey: ['item-by-id', itemId, 'bid-by-item-id'], queryFn: async () => await graphQLClient.request(bidsByItemIdDocument,
-      { itemId: itemId, last: last }
-    ), enabled: showBidHistory
+    queryKey: ['item-by-id', itemId, 'bid-by-item-id'],
+    queryFn: async ({ pageParam }) => {
+      return await graphQLClient.request(bidsByItemIdDocument,
+        { itemId: itemId, last: last, before: pageParam as string | undefined }
+      )
+    },
+    initialPageParam: undefined,
+    getNextPageParam: (lastPage, pages) => lastPage.bidsByItemId.pageInfo.endCursor,
+    getPreviousPageParam: (firstPage, pages) => firstPage.bidsByItemId.pageInfo.startCursor,
+    enabled: showBidHistory
   })
 }
 

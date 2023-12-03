@@ -20,7 +20,7 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
   const navigate = useNavigate();
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const { data: bidsData, refetch: bidsRefetch } = useBidsByItemId(itemId, 10, showBidHistory);
+  const { data: bidsData, hasNextPage: bidsHasNextPage, fetchNextPage: fetchBidsNextPage } = useBidsByItemId(itemId, 10, showBidHistory);
 
   const updateDimension = () => {
     window?.top?.postMessage({ actions: [{ action: "setHeight", valuePx: ref?.current?.clientHeight }] }, "*");
@@ -41,7 +41,7 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
 
   const handleShowBidHistory = () => {
     setShowBidHistory(!showBidHistory);
-    bidsRefetch();
+    // bidsRefetch();
   };
 
   const handlePlaceBid = () => {
@@ -92,14 +92,28 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
             </button>
           </div>
           <div>
-            {showBidHistory && bidsData
-              ? bidsData.bidsByItemId.nodes.map((bid, index) => (
-                  <p key={index} style={{ fontSize: "0.8rem", marginBottom: 0 }}>
-                    <b>${bid.newPrice}</b> by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
-                    {bid.message ? `with message: ${bid.message}` : null}
+            {showBidHistory && bidsData ? (
+              <>
+                {bidsData.pages.map((group, i) => (
+                  <React.Fragment key={i}>
+                    {group.bidsByItemId.nodes.map((bid, index) => (
+                      <p key={index} style={{ fontSize: "0.8rem", marginBottom: 0 }}>
+                        <b>${bid.newPrice}</b> by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
+                        {bid.message ? `with message: ${bid.message}` : null}
+                      </p>
+                    ))}
+                  </React.Fragment>
+                ))}
+                {bidsHasNextPage && (
+                  <p
+                    style={{ fontSize: "0.8rem", marginBottom: 0, cursor: "pointer", color: "#d22238" }}
+                    onClick={() => fetchBidsNextPage()}
+                  >
+                    previous bids
                   </p>
-                ))
-              : null}
+                )}
+              </>
+            ) : null}
           </div>
           <div style={{ marginTop: "50px" }}>
             <button onClick={() => handlePlaceBid()}>Place your bid</button>

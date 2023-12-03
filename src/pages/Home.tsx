@@ -8,6 +8,7 @@ import { useCatalogUpdatesSubscription } from "../hooks/useCatalogUpdatesSubscri
 
 const Home = () => {
   const { data, isLoading } = useItemsOnSale();
+
   const [searchParams] = useSearchParams();
   const userId = searchParams.get("userId");
   const userName = searchParams.get("userName");
@@ -41,10 +42,10 @@ const Home = () => {
     };
 
     if (userId && userName && userEmail) getUserId();
-  }, [searchParams]);
+  }, [userId, userName, userEmail]);
 
   useCatalogUpdatesSubscription();
-  console.log(data?.itemsOnSale?.nodes);
+
   return (
     <div>
       {isLoading ? (
