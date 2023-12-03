@@ -60,7 +60,7 @@ export function useMakeBidByItemId(itemId: string, bidderId: string, newPrice: n
 }
 
 export function useCreateOrUpdateUser(userId: string, username: string, email: string) {
-  if (!userId && !username && !email) window.open("https://app-dev.dw-connect.org/projects/test-in", '_self')
+  if (!userId && !username && !email) window.open("https://dw-connect.org/projects/nrc-stupa/auction", '_self')
   return useMutation<CreateOrUpdateUserMutation>({
     mutationFn: () => graphQLClient.request(createOrUpdateUserDocument,
       { userId: userId, username: username, email: email }

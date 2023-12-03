@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { itemUpdatesDocument } from "../queries";
 
 const SUB_URL: string = (process.env.REACT_APP_API_SUBSCRIPTION_URL as string)
-const API_KEY: string = (process.env.REACT_APP_API_KEY as string)
+// const API_KEY: string = (process.env.REACT_APP_API_KEY as string)
 
 export const useItemUpdateSubscription = (itemId: string) => {
   const queryClient = useQueryClient();
@@ -12,11 +12,7 @@ export const useItemUpdateSubscription = (itemId: string) => {
     const ws = new WebSocket(SUB_URL, 'graphql-ws');
     ws.onopen = () => {
       ws.send(JSON.stringify({
-        "type": "connection_init", "payload": {
-          headers: {
-            "X-API-KEY": API_KEY,
-          },
-        }
+        "type": "connection_init", "payload": {}
       }));
       ws.send(JSON.stringify({
         "id": "1",
