@@ -3,6 +3,18 @@
   height: 300px
 }
 
+.image_container_announced {
+  width: 130px;
+  height: 130px
+}
+
+.card_container_announced {
+  flex: 0 0 130px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
 .card_container {
   flex: 0 0 300px;
   margin-right: 20px;
@@ -11,7 +23,30 @@
 }
 
 .card_text_container {
-  margin-top: 20px
+  margin-top: 20px;
+  width: 100%
+}
+
+.card_text_container_announced {
+  margin-top: 20px;
+  width: 130px
+}
+
+p.caption {
+  font-size: 0.8rem;
+  margin-bottom: 0
+}
+
+p.secondary_title {
+  font-size: 1rem;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.truncate_text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 

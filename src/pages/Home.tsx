@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import debounce from "lodash.debounce";
 import classes from "../styles/Home.module.css";
 import { useCatalogUpdatesSubscription } from "../hooks/useCatalogUpdatesSubscription";
+import ItemAnnouncedCard from "../components/ItemAnnouncedCard";
 
 const Home = () => {
   const { data, isLoading } = useItemsOnSale();
@@ -51,12 +52,26 @@ const Home = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div ref={ref} className={classes.items_grid}>
-          {data?.itemsOnSale?.nodes
-            .filter(item => item.state === "ON_SALE")
-            .map((itemOnSale, index) => (
-              <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
-            ))}
+        <div ref={ref} style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div className={classes.items_grid}>
+            {data?.itemsOnSale?.nodes
+              .filter(item => item.state === "ON_SALE")
+              .map((itemOnSale, index) => (
+                <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
+              ))}
+          </div>
+          <div>
+            <div style={{ marginBottom: 16 }}>
+              <h1 style={{ color: "grey" }}>Coming up soon</h1>
+            </div>
+            <div className={classes.items_grid}>
+              {data?.itemsOnSale?.nodes
+                .filter(item => item.state === "ANNOUNCED")
+                .map((itemOnSale, index) => (
+                  <ItemAnnouncedCard key={index} itemOnSale={itemOnSale} />
+                ))}
+            </div>
+          </div>
         </div>
       )}
     </div>

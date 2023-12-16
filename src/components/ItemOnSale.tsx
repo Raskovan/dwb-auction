@@ -21,6 +21,7 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   const { data: bidsData, hasNextPage: bidsHasNextPage, fetchNextPage: fetchBidsNextPage } = useBidsByItemId(itemId, 10, showBidHistory);
+  const itemOnPreview = itemById?.state === "ANNOUNCED";
 
   const updateDimension = () => {
     window?.top?.postMessage({ actions: [{ action: "setHeight", valuePx: ref?.current?.clientHeight }] }, "*");
@@ -50,9 +51,12 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
 
   return (
     <div ref={ref}>
+      <div onClick={() => navigate(-1)} style={{ marginBottom: "32px" }}>
+        <p style={{ cursor: "pointer", color: "#d22238", marginBottom: 0 }}>{"< Go back"}</p>
+      </div>
       <div className={classes.container}>
         <div style={{ width: "50vw", marginRight: "20px" }}>
-          <div className={classes.image_container}>
+          <div style={{ height: "50vw", width: "50vw" }}>
             <img
               src={itemById?.images[viewableImageIndex].url}
               alt={itemById?.images[viewableImageIndex].id}
@@ -61,7 +65,7 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
               className={classes.image}
             />
           </div>
-          {/* {itemById?.images && itemById?.images.length > 1 ? (
+          {itemById?.images && itemById?.images.length > 1 ? (
             <div style={{ marginTop: "20px" }}>
               {itemById?.images.map((image, index) => (
                 <img
@@ -76,54 +80,58 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
                 />
               ))}
             </div>
-          ) : null} */}
+          ) : null}
         </div>
         <div>
           <h1 style={{ fontSize: "2rem", fontWeight: "700" }}>{itemById?.title}</h1>
           <p>{itemById?.description}</p>
-          <p className={classes.caption}>Provided by {itemById?.seller?.name}</p>
+          {itemById?.seller?.name && <p className={classes.caption}>Provided by {itemById?.seller?.name}</p>}
           {/* <p>Submitted: {formatDate(itemById?.startTime)}</p> */}
           {/* <p>Ends: {itemById?.endTime}</p> */}
-          <p className={classes.caption}>Started on {formatDate(itemById?.startTime)}</p>
-          <div style={{ marginBottom: "20px", marginTop: "20px" }}>
-            <h3 style={{ fontSize: "1.3rem", marginRight: "10px" }}>Current bid: ${itemById?.currentPrice}</h3>
-            <button className={classes.button_as_text} onClick={() => handleShowBidHistory()}>
-              {showBidHistory ? "Hide bid history" : "Show bid history"}
-            </button>
-          </div>
-          <div>
-            {showBidHistory && bidsData ? (
-              <>
-                {bidsData.pages.map((group, i) => (
-                  <React.Fragment key={i}>
-                    {group.bidsByItemId.nodes.map((bid, index) => (
-                      <p key={index} style={{ fontSize: "0.8rem", marginBottom: 0 }}>
-                        <b>${bid.newPrice}</b> by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
-                        {bid.message ? `with message: ${bid.message}` : null}
-                      </p>
-                    ))}
-                  </React.Fragment>
-                ))}
-                {bidsHasNextPage && (
-                  <p
-                    style={{ fontSize: "0.8rem", marginBottom: 0, cursor: "pointer", color: "#d22238" }}
-                    onClick={() => fetchBidsNextPage()}
-                  >
-                    previous bids
-                  </p>
-                )}
-              </>
-            ) : null}
-          </div>
-          <div style={{ marginTop: "50px" }}>
-            <button onClick={() => handlePlaceBid()}>Place your bid</button>
-          </div>
+          <p className={classes.caption}>
+            {itemOnPreview ? "Starts" : "Started"} on {formatDate(itemById?.startTime, true)}
+          </p>
+          {itemOnPreview ? (
+            <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+              <h3 style={{ fontSize: "1.3rem", marginRight: "10px" }}>Start price: ${itemById?.currentPrice}</h3>
+            </div>
+          ) : (
+            <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+              <h3 style={{ fontSize: "1.3rem", marginRight: "10px" }}>Current bid: ${itemById?.currentPrice}</h3>
+              <button className={classes.button_as_text} onClick={() => handleShowBidHistory()}>
+                {showBidHistory ? "Hide bid history" : "Show bid history"}
+              </button>
+            </div>
+          )}
+          {showBidHistory && bidsData ? (
+            <div>
+              {bidsData.pages.map((group, i) => (
+                <React.Fragment key={i}>
+                  {group.bidsByItemId.nodes.map((bid, index) => (
+                    <p key={index} style={{ fontSize: "0.8rem", marginBottom: 0 }}>
+                      <b>${bid.newPrice}</b> by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
+                      {bid.message ? `with message: ${bid.message}` : null}
+                    </p>
+                  ))}
+                </React.Fragment>
+              ))}
+              {bidsHasNextPage && (
+                <p style={{ fontSize: "0.8rem", marginBottom: 0, cursor: "pointer", color: "#d22238" }} onClick={() => fetchBidsNextPage()}>
+                  previous bids
+                </p>
+              )}
+            </div>
+          ) : null}
+          {!itemOnPreview && (
+            <div style={{ marginTop: "50px" }}>
+              <button className={classes.bid_button} onClick={() => handlePlaceBid()}>
+                Place your bid
+              </button>
+            </div>
+          )}
         </div>
       </div>
       {showPlaceBid && <PlaceBidForm handleShowPlaceBid={setShowPlaceBid} itemId={itemId} currentPrice={itemById?.currentPrice} />}
-      <div onClick={() => navigate(-1)} style={{ marginTop: "32px" }}>
-        <p style={{ cursor: "pointer", color: "#d22238", marginBottom: 0 }}>{"< Go back"}</p>
-      </div>
     </div>
   );
 };
