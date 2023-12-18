@@ -9,7 +9,9 @@
   "dependencies": {
     "@tanstack/react-query": "^5.7.1",
     "@tanstack/react-query-devtools": "^5.7.1",
+    "@types/dompurify": "^3.0.5",
     "@types/lodash.debounce": "^4.0.9",
+    "dompurify": "^3.0.6",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "graphql-ws": "^5.14.2",

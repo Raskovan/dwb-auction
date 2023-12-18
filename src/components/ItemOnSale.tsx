@@ -7,6 +7,7 @@ import PlaceBidForm from "./PlaceBidForm";
 import { useNavigate } from "react-router-dom";
 import debounce from "lodash.debounce";
 import { useItemUpdateSubscription } from "../hooks/useItemUpdateSubscription";
+import DOMPurify from "dompurify";
 
 type ItemOnSaleProps = {
   itemId: string;
@@ -49,6 +50,10 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
     setShowPlaceBid(!showPlaceBid);
   };
 
+  const sanitizedData = (data: string) => ({
+    __html: DOMPurify.sanitize(data)
+  });
+
   return (
     <div ref={ref}>
       <div onClick={() => navigate(-1)} style={{ marginBottom: "32px" }}>
@@ -85,7 +90,7 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
         <div>
           <h1 style={{ fontSize: "2rem", fontWeight: "700" }}>{itemById?.title}</h1>
           {/* @ts-ignore */}
-          <p dangerouslySetInnerHTML={{ __html: itemById?.description }} />
+          <p dangerouslySetInnerHTML={sanitizedData(itemById?.description)} />
           {itemById?.seller?.name && <p className={classes.caption}>Provided by {itemById?.seller?.name}</p>}
           <p className={classes.caption}>
             {itemOnPreview ? "Starts" : "Started"} on {formatDate(itemById?.startTime, true)}
