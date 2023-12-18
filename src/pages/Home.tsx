@@ -6,6 +6,7 @@ import debounce from "lodash.debounce";
 import classes from "../styles/Home.module.css";
 import { useCatalogUpdatesSubscription } from "../hooks/useCatalogUpdatesSubscription";
 import ItemAnnouncedCard from "../components/ItemAnnouncedCard";
+import AuctionHelp from "../components/AuctionHelp";
 
 const Home = () => {
   const { data, isLoading } = useItemsOnSale();
@@ -71,6 +72,9 @@ const Home = () => {
                   <ItemAnnouncedCard key={index} itemOnSale={itemOnSale} />
                 ))}
             </div>
+          </div>
+          <div>
+            <AuctionHelp />
           </div>
         </div>
       )}
