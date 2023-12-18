@@ -10,8 +10,8 @@ const router = createBrowserRouter(
   [
     { path: "/", element: <Home />, errorElement: <NotFoundPage /> },
     { path: "items/:itemId", element: <ItemPage />, errorElement: <NotFoundPage /> }
-  ],
-  { basename: "/nrc-stupa-auction" }
+  ]
+  // { basename: "/nrc-stupa-auction" }
 );
 
 const queryClient = new QueryClient();

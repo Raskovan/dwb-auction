@@ -84,7 +84,8 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
         </div>
         <div>
           <h1 style={{ fontSize: "2rem", fontWeight: "700" }}>{itemById?.title}</h1>
-          <p>{itemById?.description}</p>
+          {/* @ts-ignore */}
+          <p dangerouslySetInnerHTML={{ __html: itemById?.description }} />
           {itemById?.seller?.name && <p className={classes.caption}>Provided by {itemById?.seller?.name}</p>}
           <p className={classes.caption}>
             {itemOnPreview ? "Starts" : "Started"} on {formatDate(itemById?.startTime, true)}
