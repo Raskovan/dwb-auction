@@ -86,11 +86,10 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
           <h1 style={{ fontSize: "2rem", fontWeight: "700" }}>{itemById?.title}</h1>
           <p>{itemById?.description}</p>
           {itemById?.seller?.name && <p className={classes.caption}>Provided by {itemById?.seller?.name}</p>}
-          {/* <p>Submitted: {formatDate(itemById?.startTime)}</p> */}
-          {/* <p>Ends: {itemById?.endTime}</p> */}
           <p className={classes.caption}>
             {itemOnPreview ? "Starts" : "Started"} on {formatDate(itemById?.startTime, true)}
           </p>
+          {!itemOnPreview && <p className={classes.caption}>Ends on {formatDate(itemById?.endTime, true)}</p>}
           {itemOnPreview ? (
             <div style={{ marginBottom: "20px", marginTop: "20px" }}>
               <h3 style={{ fontSize: "1.3rem", marginRight: "10px" }}>Start price: ${itemById?.currentPrice}</h3>
