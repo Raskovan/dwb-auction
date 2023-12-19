@@ -45,7 +45,14 @@ const AuctionHelp = () => {
         </ol>
         <p style={{ fontWeight: 500, marginBottom: 0 }}>How to stay updated? </p>
         <p>
-          Join the <a href="https://signal.group/#CjQKIAYnT0fmMttHr-k0P77nX3iD0iBuAL8QYuXIPxdroC8vEhA-gu0dDTqSFsmrMI6ntKuN">Signal group</a>{" "}
+          Join the{" "}
+          <a
+            href="https://signal.group/#CjQKIAYnT0fmMttHr-k0P77nX3iD0iBuAL8QYuXIPxdroC8vEhA-gu0dDTqSFsmrMI6ntKuN"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Signal group
+          </a>{" "}
           to stay connected!
         </p>
       </div>
