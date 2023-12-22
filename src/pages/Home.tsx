@@ -47,7 +47,7 @@ const Home = () => {
   }, [userId, userName, userEmail]);
 
   useCatalogUpdatesSubscription();
-
+  const announcedItems = data?.itemsOnSale?.nodes.filter(item => item.state === "ANNOUNCED");
   return (
     <div>
       {isLoading ? (
@@ -61,19 +61,22 @@ const Home = () => {
                 <ItemOnSaleCard key={index} itemOnSale={itemOnSale} />
               ))}
           </div>
-          <div>
-            <div style={{ marginBottom: 16 }}>
-              <h1 style={{ color: "grey" }}>Coming up soon</h1>
+          {announcedItems && announcedItems.length > 0 && (
+            <div>
+              <div style={{ marginBottom: 16 }}>
+                <h1 style={{ color: "grey" }}>Coming up soon</h1>
+              </div>
+              <div className={classes.items_grid}>
+                {announcedItems
+                  ?.filter(item => item.state === "ANNOUNCED")
+                  .map((itemOnSale, index) => (
+                    <ItemAnnouncedCard key={index} itemOnSale={itemOnSale} />
+                  ))}
+              </div>
             </div>
-            <div className={classes.items_grid}>
-              {data?.itemsOnSale?.nodes
-                .filter(item => item.state === "ANNOUNCED")
-                .map((itemOnSale, index) => (
-                  <ItemAnnouncedCard key={index} itemOnSale={itemOnSale} />
-                ))}
-            </div>
-          </div>
+          )}
           <div>
+            <hr style={{ height: "1px", border: "none", color: "grey", backgroundColor: "grey", marginBottom: "20px" }} />
             <AuctionHelp />
           </div>
         </div>
