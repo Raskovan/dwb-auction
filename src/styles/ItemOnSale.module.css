@@ -5,6 +5,12 @@
 
 .image_container {
   width: 50vw;
+  height: 50vw;
+}
+
+.images_block_container {
+  width: 50vw;
+  margin-right: 20px
 }
 
 .text_span {
@@ -54,6 +60,11 @@
   .image_container {
     width: 95vw;
     height: 95vw;
+  }
+
+  .images_block_container {
+    width: 100vw;
+    margin-right: 20px
   }
 
   .bid_button {

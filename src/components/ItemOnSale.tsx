@@ -60,8 +60,8 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
         <p style={{ cursor: "pointer", color: "#d22238", marginBottom: 0 }}>{"< Go back"}</p>
       </div>
       <div className={classes.container}>
-        <div style={{ width: "50vw", marginRight: "20px" }}>
-          <div style={{ height: "50vw", width: "50vw" }}>
+        <div className={classes.images_block_container}>
+          <div className={classes.image_container}>
             <img
               src={itemById?.images[viewableImageIndex].url}
               alt={itemById?.images[viewableImageIndex].id}
