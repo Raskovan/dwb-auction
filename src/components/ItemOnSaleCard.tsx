@@ -10,6 +10,8 @@ type ItemOnSaleCardProps = {
 const ItemOnSaleCard: React.FC<ItemOnSaleCardProps> = ({ itemOnSale }) => {
   const navigate = useNavigate();
 
+  if (itemOnSale?.images?.length === 0) return null;
+
   return (
     <div className={classes.card_container} onClick={() => navigate(`items/${itemOnSale.id}`)}>
       <div className={classes.image_container}>
