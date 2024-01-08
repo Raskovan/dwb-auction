@@ -22,8 +22,8 @@ const AuctionHelp = () => {
         <p style={{ fontWeight: 500, marginBottom: 0 }}>How to pay?</p>
         <ol style={{ lineHeight: 1.3, paddingInlineStart: "2rem", marginTop: 0 }}>
           <li>
-            We request all payments through a check to avoid paying fees. Please contact the Finance team{" "}
-            <a href="mailto:nrcstupa@diamondway.org">(nrcstupa@diamondway.org)</a> to arrange this.
+            We request all payments through a check to avoid paying fees. Please contact the Finance team at{" "}
+            <a href="mailto:victory@diamondway.org">victory@diamondway.org</a> to arrange this.
           </li>
           <li>
             If you cannot pay with the check, contact <a href="mailto:krvss@hotmail.com">krvss@hotmail.com</a>

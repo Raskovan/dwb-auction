@@ -103,16 +103,20 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
           ) : (
             <div style={{ marginBottom: "20px", marginTop: "20px" }}>
               <h3 style={{ fontSize: "1.3rem", marginRight: "10px" }}>Current bid: ${itemById?.currentPrice}</h3>
-              <button className={classes.button_as_text} onClick={() => handleShowBidHistory()}>
-                {showBidHistory ? "Hide bid history" : "Show bid history"}
-              </button>
+              {bidsData?.pages[0]?.bidsByItemId?.nodes?.length! > 0 ? (
+                <button className={classes.button_as_text} onClick={() => handleShowBidHistory()}>
+                  {showBidHistory ? "Hide bid history" : "Show bid history"}
+                </button>
+              ) : (
+                <p className={classes.button_as_text}>No bids yet</p>
+              )}
             </div>
           )}
           {showBidHistory && bidsData ? (
             <div>
-              {bidsData.pages.map((group, i) => (
+              {bidsData.pages.map((page, i) => (
                 <React.Fragment key={i}>
-                  {group.bidsByItemId.nodes.map((bid, index) => (
+                  {page.bidsByItemId.nodes.map((bid, index) => (
                     <p key={index} style={{ fontSize: "0.8rem", marginBottom: 0 }}>
                       <b>${bid.newPrice}</b> by {bid.bidder?.name || "Unknown"} on {formatDate(bid.bidTime)}{" "}
                       {bid.message ? `with message: ${bid.message}` : null}
