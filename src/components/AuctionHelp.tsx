@@ -26,7 +26,7 @@ const AuctionHelp = () => {
             <a href="mailto:victory@diamondway.org">victory@diamondway.org</a> to arrange this.
           </li>
           <li>
-            If you cannot pay with the check, contact <a href="mailto:krvss@hotmail.com">krvss@hotmail.com</a>
+            If you cannot pay with a check, contact <a href="mailto:krvss@hotmail.com">krvss@hotmail.com</a>
           </li>
         </ol>
         <p style={{ fontWeight: 500, marginBottom: 0 }}>How to ship?</p>
@@ -37,7 +37,7 @@ const AuctionHelp = () => {
               <li>Seller covers the shipment</li>
               <li>Buyer covers the shipment</li>
               <li>Both buyer and seller cover the shipment</li>
-              <li>The seller can drop the item at the NRC and the buyer can come to pick it up on the course.</li>
+              <li>The seller can drop off the item at the NRC and the buyer can come pick it up at the course.</li>
               <li>You can send it with some traveling friends for free.</li>
             </ul>
           </li>
