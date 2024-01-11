@@ -41,8 +41,12 @@ export function useBidsByItemId(itemId: string | undefined, last: number = 10, s
       )
     },
     initialPageParam: undefined,
-    getNextPageParam: (lastPage, pages) => lastPage.bidsByItemId.pageInfo.endCursor,
-    getPreviousPageParam: (firstPage, pages) => firstPage.bidsByItemId.pageInfo.startCursor,
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.bidsByItemId.pageInfo.hasPreviousPage ? lastPage.bidsByItemId.pageInfo.endCursor : null
+    },
+    getPreviousPageParam: (firstPage, pages) => {
+      return firstPage.bidsByItemId.pageInfo.hasNextPage ? firstPage.bidsByItemId.pageInfo.startCursor : null
+    },
     enabled: showBidHistory
   })
 }

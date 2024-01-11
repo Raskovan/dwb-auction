@@ -53,7 +53,7 @@ const ItemOnSale: React.FC<ItemOnSaleProps> = ({ itemId, itemById }) => {
   const sanitizedData = (data: string) => ({
     __html: DOMPurify.sanitize(data)
   });
-  console.log(bidsData);
+
   return (
     <div ref={ref}>
       <div onClick={() => navigate(-1)} style={{ marginBottom: "32px" }}>
